@@ -1,0 +1,99 @@
+{
+  "project_info": {
+    "project_number": "242956282629",
+    "firebase_url": "https://androideatit-ccbd6.firebaseio.com",
+    "project_id": "androideatit-ccbd6",
+    "storage_bucket": "androideatit-ccbd6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:242956282629:android:7a28106a35db77b3",
+        "android_client_info": {
+          "package_name": "com.dev.jackmeraz.androideatit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "242956282629-hdabbo8eqc2jim51a0ndv5gs2qaqp585.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dev.jackmeraz.androideatit",
+            "certificate_hash": "2ce49037afd33ac3ff8b758dc49a625dabaa5e10"
+          }
+        },
+        {
+          "client_id": "242956282629-hcr2g5k5pdg7g59kpfi9ff7dr28cd1ni.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBFS7WcuDuOSHa-HO-wz6ayl2jdtkykMAQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "242956282629-hcr2g5k5pdg7g59kpfi9ff7dr28cd1ni.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:242956282629:android:c4dccf5618143312",
+        "android_client_info": {
+          "package_name": "com.dev.jackmeraz.androideatitserver"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "242956282629-qj0mqf5kjm59pcuk4evaht21q01c6n38.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dev.jackmeraz.androideatitserver",
+            "certificate_hash": "2ce49037afd33ac3ff8b758dc49a625dabaa5e10"
+          }
+        },
+        {
+          "client_id": "242956282629-hcr2g5k5pdg7g59kpfi9ff7dr28cd1ni.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBFS7WcuDuOSHa-HO-wz6ayl2jdtkykMAQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "242956282629-hcr2g5k5pdg7g59kpfi9ff7dr28cd1ni.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
