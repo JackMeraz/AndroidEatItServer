@@ -3,6 +3,8 @@ package com.dev.jackmeraz.androideatitserver;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -15,11 +17,27 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.dev.jackmeraz.androideatitserver.Common.Common;
+import com.dev.jackmeraz.androideatitserver.Model.Categoria;
+import com.dev.jackmeraz.androideatitserver.ViewHolder.MenuViewHolder;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.squareup.picasso.Picasso;
 
 public class Home extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     TextView txtFullName;
+
+    //Firebase
+    FirebaseDatabase database;
+    DatabaseReference categorias;
+    FirebaseRecyclerAdapter<Categoria, MenuViewHolder> adapter;
+
+    //View
+    RecyclerView recycler_menu;
+    RecyclerView.LayoutManager layoutManager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +46,14 @@ public class Home extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("Menu Administracion");
         setSupportActionBar(toolbar);
+
+
+        //Iniciar Firebase
+
+        database = FirebaseDatabase.getInstance();
+        categorias = database.getReference("Categoria");
+
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -51,6 +77,37 @@ public class Home extends AppCompatActivity
         View headerView = navigationView.getHeaderView(0);
         txtFullName = (TextView)headerView.findViewById(R.id.txtFullName);
         txtFullName.setText(Common.currentUser.getName());
+
+        //Iniciar View
+        recycler_menu = (RecyclerView) findViewById(R.id.recycler_menu);
+        recycler_menu.setHasFixedSize(true);
+        layoutManager = new LinearLayoutManager(this);
+        recycler_menu.setLayoutManager(layoutManager);
+
+        cargarMenu();
+
+    }
+
+    private void cargarMenu() {
+
+        adapter = new FirebaseRecyclerAdapter<Categoria, MenuViewHolder>(
+                Categoria.class,
+                R.layout.menu_item,
+                MenuViewHolder.class,
+                categorias
+        ) {
+            @Override
+            protected void populateViewHolder(MenuViewHolder menuViewHolder, Categoria categoria, int i) {
+
+                menuViewHolder.txtMenuName.setText(categoria.getNombre());
+                Picasso.with(Home.this).load(categoria.getImagen())
+                        .into(menuViewHolder.imageView);
+
+            }
+        };
+
+        adapter.notifyDataSetChanged(); //Refresca informacion si la informacion cambia
+        recycler_menu.setAdapter(adapter);
 
     }
 
