@@ -51,7 +51,7 @@ public class Home extends AppCompatActivity
         //Iniciar Firebase
 
         database = FirebaseDatabase.getInstance();
-        categorias = database.getReference("Categoria");
+        categorias = database.getReference("Categorias");
 
 
 
@@ -99,8 +99,8 @@ public class Home extends AppCompatActivity
             @Override
             protected void populateViewHolder(MenuViewHolder menuViewHolder, Categoria categoria, int i) {
 
-                menuViewHolder.txtMenuName.setText(categoria.getNombre());
-                Picasso.with(Home.this).load(categoria.getImagen())
+                menuViewHolder.txtMenuName.setText(categoria.getName());
+                Picasso.with(Home.this).load(categoria.getImage())
                         .into(menuViewHolder.imageView);
 
             }

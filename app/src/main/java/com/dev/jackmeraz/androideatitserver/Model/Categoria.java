@@ -6,30 +6,30 @@ package com.dev.jackmeraz.androideatitserver.Model;
 
 public class Categoria {
 
-    private String Nombre;
-    private String Imagen;
+    private String Name;
+    private String Image;
 
     public Categoria() {
     }
 
-    public Categoria(String nombre, String imagen) {
-        Nombre = nombre;
-        Imagen = imagen;
+    public Categoria(String name, String image) {
+        Name = name;
+        Image = image;
     }
 
-    public String getNombre() {
-        return Nombre;
+    public String getName() {
+        return Name;
     }
 
-    public void setNombre(String nombre) {
-        Nombre = nombre;
+    public void setName(String name) {
+        Name = name;
     }
 
-    public String getImagen() {
-        return Imagen;
+    public String getImage() {
+        return Image;
     }
 
-    public void setImagen(String imagen) {
-        Imagen = imagen;
+    public void setImage(String image) {
+        Image = image;
     }
 }

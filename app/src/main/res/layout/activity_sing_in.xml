@@ -56,19 +56,19 @@
     </LinearLayout>
 
     <info.hoang8f.widget.FButton
-        android:id="@+id/btnLogin"
-        android:text="Iniciar Sesíon"
-        android:textColor="@android:color/white"
-        android:layout_marginRight="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_alignParentBottom="true"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        app:buttonColor="@color/btnSingActive"
-        app:shadowColor="@android:color/black"
-        app:shadowEnabled="true"
-        app:shadowHeight="5dp"
-        app:cornerRadius="4dp"
-        />
+    android:id="@+id/btnLogin"
+    android:text="Iniciar Sesíon"
+    android:textColor="@android:color/white"
+    android:layout_marginRight="8dp"
+    android:layout_marginLeft="8dp"
+    android:layout_alignParentBottom="true"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:buttonColor="@color/btnSingActive"
+    app:shadowColor="@android:color/black"
+    app:shadowEnabled="true"
+    app:shadowHeight="5dp"
+    app:cornerRadius="4dp"
+    />
 </RelativeLayout>
