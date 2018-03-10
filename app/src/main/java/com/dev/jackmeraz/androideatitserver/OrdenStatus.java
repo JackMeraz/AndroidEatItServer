@@ -1,0 +1,13 @@
+package com.dev.jackmeraz.androideatitserver;
+
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+
+public class OrdenStatus extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_orden_status);
+    }
+}

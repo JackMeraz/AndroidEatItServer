@@ -23,7 +23,8 @@
             android:name=".Home"
             android:label="@string/title_activity_home"
             android:theme="@style/AppTheme" />
-        <activity android:name=".ComidaList"></activity>
+        <activity android:name=".ComidaList" />
+        <activity android:name=".OrdenStatus"></activity>
     </application>
 
 </manifest>

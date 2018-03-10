@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -258,5 +259,142 @@ public class ComidaList extends AppCompatActivity {
             saveUri = data.getData();
             btnSelect.setText("Imagen Seleccionada!!!");
         }
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        if (item.getTitle().equals(Common.UPDATE))
+        {
+            showUpdateFoodDialog(adapter.getRef(item.getOrder()).getKey(),adapter.getItem(item.getOrder()));
+        }
+        else if (item.getTitle().equals(Common.DELETE))
+        {
+            deleteComida(adapter.getRef(item.getOrder()).getKey());
+        }
+        return super.onContextItemSelected(item);
+    }
+
+    private void deleteComida(String key) {
+        comidaList.child(key).removeValue();
+        Snackbar.make(rootLayout, "Comida Borrada exitosamente", Snackbar.LENGTH_SHORT)
+                .show();
+    }
+
+    private void showUpdateFoodDialog(final String key, final Comida item) {
+
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(ComidaList.this);
+        alertDialog.setTitle("Editar Comida");
+        alertDialog.setMessage("Por favor completa la información");
+
+        LayoutInflater inflater = this.getLayoutInflater();
+        View add_menu_layout = inflater.inflate(R.layout.add_new_food_layout, null);
+
+        txtName = add_menu_layout.findViewById(R.id.txtName);
+        txtDescripcion = add_menu_layout.findViewById(R.id.txtDescripcion);
+        txtPrecio = add_menu_layout.findViewById(R.id.txtPrecio);
+        txtDescuento = add_menu_layout.findViewById(R.id.txtDescuento);
+
+        //Establece valor default para mostrar
+        txtName.setText(item.getName());
+        txtDescripcion.setText(item.getDescripcion());
+        txtPrecio.setText(item.getPrecio());
+        txtDescuento.setText(item.getDescuento());
+
+        btnSelect = add_menu_layout.findViewById(R.id.btnSelect);
+        btnCargar = add_menu_layout.findViewById(R.id.btnUpload);
+
+        //Evento para boton
+        btnSelect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                chooseImage(); //Permita que el usuario seleccione la imagen de la galería y guarde la uri de esta imagen
+            }
+        });
+
+        btnCargar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cambiarImagen(item);
+
+            }
+        });
+
+        alertDialog.setView(add_menu_layout);
+        alertDialog.setIcon(R.drawable.ic_shopping_cart_black_24dp);
+
+        //Establecer Boton
+        alertDialog.setPositiveButton("SI", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                dialog.dismiss();
+
+
+                    //Actualizar Informacion
+                    item.setName(txtName.getText().toString());
+                    item.setDescripcion(txtDescripcion.getText().toString());
+                    item.setPrecio(txtPrecio.getText().toString());
+                    item.setDescuento(txtDescuento.getText().toString());
+
+                    comidaList.child(key).setValue(item);
+                    Snackbar.make(rootLayout, "Comida " + item.getName()+ " ha sido actualizada", Snackbar.LENGTH_SHORT)
+                            .show();
+
+
+            }
+        });
+        alertDialog.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                dialog.dismiss();
+
+            }
+        });
+        alertDialog.show();
+
+    }
+
+    private void cambiarImagen(final Comida item) {
+        if (saveUri != null )
+        {
+            final ProgressDialog mDialog = new ProgressDialog(this);
+            mDialog.setMessage("Cargando...");
+            mDialog.show();
+
+            String imageName = UUID.randomUUID().toString();
+            final StorageReference imageFolder = storageReference.child("images/"+imageName);
+            imageFolder.putFile(saveUri)
+                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            mDialog.dismiss();
+                            Toast.makeText(ComidaList.this, "Cargado Correctamente !!!", Toast.LENGTH_SHORT).show();
+                            imageFolder.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    //establecer el valor para la nueva categoría si la carga de la imagen y podemos obtener el enlace de descarga
+                                    item.setImage(uri.toString());
+
+                                }
+                            });
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            mDialog.dismiss();
+                            Toast.makeText(ComidaList.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                            double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
+                            mDialog.setMessage("Cargando " + progress+"%");
+                        }
+                    });
+        }
+
     }
 }
