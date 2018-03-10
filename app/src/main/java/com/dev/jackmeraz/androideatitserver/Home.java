@@ -67,7 +67,7 @@ public class Home extends AppCompatActivity
     Categoria newCategoria;
 
     Uri saveUri;
-    private final int PICK_IMAGE_REQUEST = 71;
+
 
     DrawerLayout drawer;
 
@@ -227,7 +227,7 @@ public class Home extends AppCompatActivity
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
+        if (requestCode == Common.PICK_IMAGE_REQUEST && resultCode == RESULT_OK
                 && data != null && data.getData() != null)
         {
             saveUri = data.getData();
@@ -240,7 +240,7 @@ public class Home extends AppCompatActivity
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent, "Seleccionar Imagen"), PICK_IMAGE_REQUEST);
+        startActivityForResult(Intent.createChooser(intent, "Seleccionar Imagen"), Common.PICK_IMAGE_REQUEST);
 
     }
 
@@ -262,7 +262,10 @@ public class Home extends AppCompatActivity
                 menuViewHolder.setItemClickListener(new ItemClickListener() {
                     @Override
                     public void onClick(View view, int pos, Boolean isLongClick) {
-                        //
+                        //Envia CategoriaID e inicia nuevo activity
+                        Intent comidaList = new Intent(Home.this, ComidaList.class);
+                        comidaList.putExtra("CategoriaId", adapter.getRef(pos).getKey());
+                        startActivity(comidaList);
                     }
                 });
 
