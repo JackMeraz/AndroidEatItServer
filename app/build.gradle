@@ -40,6 +40,8 @@ dependencies {
     compile 'com.firebaseui:firebase-ui-database:1.2.0'
     compile 'com.squareup.picasso:picasso:2.5.2'
 
+    compile 'com.jaredrummler:material-spinner:1.1.0'
+
 
 }
 

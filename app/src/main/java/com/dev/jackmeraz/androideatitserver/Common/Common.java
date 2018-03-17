@@ -15,4 +15,14 @@ public class Common {
 
     public static final int PICK_IMAGE_REQUEST = 71;
 
+    public static String convertirCodigoToStatus (String codigo)
+    {
+        if (codigo.equals("0"))
+            return "En Espera de ser Procesado";
+        else if (codigo.equals("1"))
+            return "Preparando Orden para ser Enviada";
+        else
+            return "Orden en proceso de entrega";
+    }
+
 }

@@ -315,6 +315,12 @@ public class Home extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
+        if (id == R.id.nav_ordenes)
+        {
+            Intent ordenes = new Intent(Home.this, OrdenStatus.class);
+            startActivity(ordenes);
+        }
+
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
