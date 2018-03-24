@@ -9,11 +9,10 @@ import com.dev.jackmeraz.androideatitserver.Interface.ItemClickListener;
 import com.dev.jackmeraz.androideatitserver.R;
 
 /**
- * Created by jacobo.meraz on 10/03/2018.
+ * Created by jacobo.meraz on 24/03/2018.
  */
 
-public class OrdenViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnCreateContextMenuListener {
-
+public class OrdenViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnCreateContextMenuListener{
     public TextView txtOrdenId, txtOrdenStatus, txtOrdenTelefono, txtOrdenDireccion;
 
     private ItemClickListener itemClickListener;
@@ -43,9 +42,10 @@ public class OrdenViewHolder extends RecyclerView.ViewHolder implements View.OnC
 
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-        menu.setHeaderTitle("Seleccione la Acción");
+        menu.setHeaderTitle("Seleccione la Opcion:");
 
-        menu.add(0,0,getAdapterPosition(), "Actualizar");
+        menu.add(0, 0, getAdapterPosition(), "Actualizar");
+        menu.add(0, 0, getAdapterPosition(), "Borrar");
+
     }
 }
-
